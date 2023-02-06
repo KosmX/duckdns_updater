@@ -6,7 +6,7 @@ A multiplatform CLI ddns updater, supporting IPv4 and IPv6 (or both at once)
 ## Build
 `./gradle build` and get the file from `./build/libs`
 
-simply create a `config.json`
+simply create a `ddns.json`
 ```json
 {
   "domain1": {
