@@ -29,16 +29,12 @@ fun main(args: Array<String>) {
             StringBuilder("https://www.duckdns.org/update?domains=$name&token=${entry.token.urlEncode()}&verbose=${verbose}")
 
 
-        if (entry.protocol.ipv6 && ipv6 == null) {
-            if (entry.protocol == Protocol.IPv6 && entry.failHard) error("Can not bind IPv6 to $name")
-        }
-
         if (entry.protocol.ipv6) {
 
             if (ipv6 != null) {
                 urlBuilder.append("&ipv6=${ipv6!!.hostAddress.urlEncode()}")
             } else {
-                if (entry.failHard) {
+                if (!entry.failHard) {
                     error("Can not bind IPv6 to $name")
                 } else {
                     return@forEach
