@@ -18,7 +18,7 @@ fun main(args: Array<String>) {
     val verbose: Boolean by parser.option(ArgType.Boolean, "verbose", "v").default(false)
     parser.parse(args)
 
-    val ipv6 by lazy{ getInet6IAAddress(verbose) }
+    val ipv6 by lazy { getInet6IAAddress(verbose) }
 
     val dnsList: Map<String, DdnsEntry> = File("ddns.json").inputStream().use { Json.decodeFromStream(it) }
 
@@ -40,7 +40,9 @@ fun main(args: Array<String>) {
                     return@forEach
                 }
             }
-            val res = Jsoup.connect(urlBuilder.toString()).ignoreHttpErrors(!entry.failHard).method(Connection.Method.GET).execute()
+            val res =
+                Jsoup.connect(urlBuilder.toString()).ignoreHttpErrors(!entry.failHard).method(Connection.Method.GET)
+                    .execute()
             println(res.body())
         }
         if (entry.protocol.ipv4) {
